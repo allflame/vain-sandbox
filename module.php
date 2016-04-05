@@ -23,3 +23,13 @@ $comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($co
 
 $evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
 var_dump($expression->evaluate($evaluator));
+
+$expression = new \Vain\Expression\Comparison\Less\LessExpression(
+    new \Vain\Data\Descriptor\Module\Property\PropertyModuleDescriptor(new \Vain\Sandbox\Data\Module\RuntimeDataModule(), 'version', 'int'),
+    new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(100, 'int')
+);
+$runtimeData = new \Vain\Data\Runtime\RuntimeData(['version' => 101]);
+var_dump($expression->parse($humanParser));
+var_dump($expression->evaluate($evaluator, $runtimeData));
+
+

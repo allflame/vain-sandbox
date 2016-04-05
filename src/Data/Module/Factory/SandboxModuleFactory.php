@@ -22,9 +22,14 @@ class SandboxModuleFactory implements ModuleFactoryInterface
         switch ($moduleName) {
             case 'system.time' :
                 return new TimeDataModule();
-            break;
+                break;
+            case
+                'system.runtime' :
+                return new TimeDataModule();
+                break;
             default:
                 throw new UnknownSandboxModuleFactoryException($this, $moduleName);
+                break;
         }
     }
 }
