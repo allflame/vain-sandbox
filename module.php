@@ -9,7 +9,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
-    new \Vain\Data\Descriptor\Module\Direct\DirectModuleDescriptor(new \Vain\Sandbox\Data\Module\TimeDataModule(), 'time'),
+    new \Vain\Data\Descriptor\Module\Direct\DirectModuleDescriptor(new \Vain\Data\Module\System\TimeDataModule(), 'time'),
     new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(new DateTime('+1 day'), 'time')
 );
 
@@ -25,7 +25,7 @@ $evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorReposi
 var_dump($expression->evaluate($evaluator));
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
-    new \Vain\Data\Descriptor\Module\Property\PropertyModuleDescriptor(new \Vain\Sandbox\Data\Module\RuntimeDataModule(), 'version', 'int'),
+    new \Vain\Data\Descriptor\Module\Property\PropertyModuleDescriptor(new \Vain\Data\Module\System\RuntimeDataModule(), 'version', 'int'),
     new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(100, 'int')
 );
 $runtimeData = new \Vain\Data\Runtime\RuntimeData(['version' => 101]);

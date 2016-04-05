@@ -9,26 +9,28 @@
 namespace Vain\Sandbox\Data\Module\Factory;
 
 use Vain\Data\Module\Factory\ModuleFactoryInterface;
-use Vain\Sandbox\Data\Module\Factory\Exception\UnknownSandboxModuleFactoryException;
-use Vain\Sandbox\Data\Module\TimeDataModule;
 
 class SandboxModuleFactory implements ModuleFactoryInterface
 {
+    private $basicFactory;
+
+    /**
+     * SandboxModuleFactory constructor.
+     * @param ModuleFactoryInterface $moduleFactory
+     */
+    public function __construct(ModuleFactoryInterface $moduleFactory)
+    {
+        $this->basicFactory = $moduleFactory;
+    }
+
     /**
      * @inheritDoc
      */
     public function createModule($moduleName)
     {
         switch ($moduleName) {
-            case 'system.time' :
-                return new TimeDataModule();
-                break;
-            case
-                'system.runtime' :
-                return new TimeDataModule();
-                break;
             default:
-                throw new UnknownSandboxModuleFactoryException($this, $moduleName);
+                return $this->basicFactory->createModule($moduleName);
                 break;
         }
     }
