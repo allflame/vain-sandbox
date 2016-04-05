@@ -1,0 +1,66 @@
+{
+    "name": "vain/sandbox",
+    "type": "shared-package",
+    "authors": [
+        {
+            "name": "Taras Girnyk",
+            "email": "le@mirohost.net",
+            "homepage": "https://github.com/allflame/vain-sandbox",
+            "role": "Maintainer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Vain\\Sandbox\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.6.0",
+        "vain/core" : "dev-master",
+        "vain/logger" : "dev-master",
+        "vain/data" : "dev-master",
+        "vain/comparator" : "dev-master",
+        "vain/expression" : "dev-master",
+        "vain/operation" : "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-comparator"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-core"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-data"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-database"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-expression"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-http"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-id"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-logger"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/allflame/vain-operation"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
