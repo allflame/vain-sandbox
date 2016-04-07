@@ -15,13 +15,23 @@ $evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorReposi
 $descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
 $descriptorBuilder = new \Vain\Expression\Descriptor\Builder\DescriptorBuilder($descriptorFactory);
 $humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
+$filterExpression = new \Vain\Expression\Comparison\Equal\EqualExpression(
+    $descriptorBuilder
+        ->module('system.runtime')
+        ->property('type')
+        ->getDescriptor(),
+    $descriptorBuilder
+        ->mode('int')
+        ->inplace(1)
+        ->getDescriptor()
+);
 $expression = new \Vain\Expression\Comparison\GreaterOrEqual\GreaterOrEqualExpression(
     $descriptorBuilder
         ->module('system.runtime')
         ->property('basket')
         ->property('transaction')
         ->property('items')
-        ->func('array_chunk', [3])
+        ->filter($filterExpression)
         ->func('count')
         ->getDescriptor(),
     /**
@@ -34,7 +44,7 @@ $expression = new \Vain\Expression\Comparison\GreaterOrEqual\GreaterOrEqualExpre
      */
     $descriptorBuilder
         ->mode('int')
-        ->inplace(6)
+        ->inplace(3)
         ->getDescriptor()
 );
 $items = [];
