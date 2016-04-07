@@ -8,7 +8,7 @@
 
 namespace Vain\Sandbox\Data\Module\Factory;
 
-use Vain\Data\Module\Factory\ModuleFactoryInterface;
+use Vain\Expression\Module\Factory\ModuleFactoryInterface;
 
 class SandboxModuleFactory implements ModuleFactoryInterface
 {

@@ -7,24 +7,24 @@
  */
 require __DIR__ . '/vendor/autoload.php';
 
+$moduleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
+$moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
+$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository);
+$comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
+$comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
+$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
+$humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
+
 $testExpression = new \Vain\Expression\Binary\AndX\AndExpression(
     new \Vain\Expression\Comparison\Less\LessExpression(
-        new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(3, 'int'),
-        new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(2, 'int')
+        $descriptorFactory->mode($descriptorFactory->inplace(2), 'int'),
+        $descriptorFactory->mode($descriptorFactory->inplace(3), 'int')
     ),
     new \Vain\Expression\Comparison\Greater\GreaterExpression(
-        new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor('b', 'string'),
-        new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor('a', 'string')
+        $descriptorFactory->mode($descriptorFactory->inplace('b'), 'string'),
+        $descriptorFactory->mode($descriptorFactory->inplace('a'), 'string')
     )
 );
 
-$humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
-
 var_dump($testExpression->parse($humanParser));
-
-$comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
-$comparators = ['int' => null, 'string' => null, 'time' => null];
-$comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory, $comparators);
-$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
-
 var_dump($testExpression->evaluate($evaluator));

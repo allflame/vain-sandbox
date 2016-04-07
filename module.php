@@ -8,34 +8,37 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$expression = new \Vain\Expression\Comparison\Less\LessExpression(
-    new \Vain\Data\Descriptor\Module\Direct\DirectModuleDescriptor(new \Vain\Data\Module\System\TimeDataModule(), 'time'),
-    new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(new DateTime('+1 day'), 'time')
-);
-
+$comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
+$comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
 $humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
+$basicModuleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
+$moduleFactory = new \Vain\Sandbox\Data\Module\Factory\SandboxModuleFactory($basicModuleFactory);
+$moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
+$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository);
+
+$expression = new \Vain\Expression\Comparison\Less\LessExpression(
+    $descriptorFactory->module('system.time'),
+    $descriptorFactory->mode($descriptorFactory->inplace(new DateTime('+1 day')), 'time')
+);
 
 var_dump($expression->parse($humanParser));
 
-$comparators = ['int' => null, 'string' => null, 'time' => null];
-$comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
-$comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory, $comparators);
 
 $evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
 var_dump($expression->evaluate($evaluator));
 
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
-    new \Vain\Data\Descriptor\Module\Property\PropertyModuleDescriptor(new \Vain\Data\Module\System\RuntimeDataModule(), 'version', 'int'),
-    new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(100, 'int')
+    $descriptorFactory->property($descriptorFactory->module('system.runtime'), 'version'),
+    $descriptorFactory->mode($descriptorFactory->inplace(100), 'int')
 );
-$runtimeData = new \Vain\Data\Runtime\RuntimeData(['version' => 101]);
+$runtimeData = new \Vain\Core\Runtime\RuntimeData(['version' => 101]);
 var_dump($expression->parse($humanParser));
 var_dump($expression->evaluate($evaluator, $runtimeData));
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
-    new \Vain\Data\Descriptor\Module\Method\MethodModuleDescriptor(new \Vain\Data\Module\System\RuntimeDataModule(), 'count', 'int'),
-    new \Vain\Data\Descriptor\InPlace\InPlaceDescriptor(0, 'int')
+    $descriptorFactory->method($descriptorFactory->module('system.runtime'), 'count'),
+    $descriptorFactory->mode($descriptorFactory->inplace(0), 'int')
 );
 var_dump($expression->parse($humanParser));
 var_dump($expression->evaluate($evaluator, $runtimeData));
