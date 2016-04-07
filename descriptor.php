@@ -9,11 +9,11 @@ require __DIR__ . '/vendor/autoload.php';
 
 $moduleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
 $moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
-$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository);
-$descriptorBuilder = new \Vain\Expression\Descriptor\Builder\DescriptorBuilder($descriptorFactory);
 $comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
 $comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
 $evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
+$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
+$descriptorBuilder = new \Vain\Expression\Descriptor\Builder\DescriptorBuilder($descriptorFactory);
 $humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
 $expression = new \Vain\Expression\Comparison\GreaterOrEqual\GreaterOrEqualExpression(
     $descriptorBuilder

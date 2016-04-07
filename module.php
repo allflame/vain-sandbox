@@ -14,7 +14,8 @@ $humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
 $basicModuleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
 $moduleFactory = new \Vain\Sandbox\Data\Module\Factory\SandboxModuleFactory($basicModuleFactory);
 $moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
-$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository);
+$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
+$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
     $descriptorFactory->module('system.time'),
@@ -24,9 +25,8 @@ $expression = new \Vain\Expression\Comparison\Less\LessExpression(
 var_dump($expression->parse($humanParser));
 
 
-$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
-var_dump($expression->evaluate($evaluator));
 
+var_dump($expression->evaluate($evaluator));
 
 $expression = new \Vain\Expression\Comparison\Less\LessExpression(
     $descriptorFactory->property($descriptorFactory->module('system.runtime'), 'version'),
