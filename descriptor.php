@@ -11,13 +11,13 @@ $moduleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
 $moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
 $comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
 $comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
-$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
+$evaluator = new Vain\Expression\Evaluator\Evaluator($comparatorRepository);
 $descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
 $descriptorBuilder = new \Vain\Expression\Descriptor\Builder\DescriptorBuilder($descriptorFactory);
-$humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
+$humanParser = new \Vain\Expression\Parser\Human\HumanParser();
 $filterExpression = new \Vain\Expression\Comparison\Equal\EqualExpression(
     $descriptorBuilder
-        ->module('system.runtime')
+        ->local()
         ->property('type')
         ->getDescriptor(),
     $descriptorBuilder
@@ -27,7 +27,7 @@ $filterExpression = new \Vain\Expression\Comparison\Equal\EqualExpression(
 );
 $expression = new \Vain\Expression\Comparison\GreaterOrEqual\GreaterOrEqualExpression(
     $descriptorBuilder
-        ->module('system.runtime')
+        ->local()
         ->property('basket')
         ->property('transaction')
         ->property('items')

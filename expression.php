@@ -9,12 +9,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 $moduleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
 $moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
-$evaluator = new Vain\Expression\Evaluator\ExpressionEvaluator($comparatorRepository);
+$evaluator = new Vain\Expression\Evaluator\Evaluator($comparatorRepository);
 $descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
 $comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
 $comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
 
-$humanParser = new \Vain\Expression\Parser\Human\HumanExpressionParser();
+$humanParser = new \Vain\Expression\Parser\Human\HumanParser();
 
 $testExpression = new \Vain\Expression\Binary\AndX\AndExpression(
     new \Vain\Expression\Comparison\Less\LessExpression(
