@@ -7,12 +7,12 @@
  */
 require __DIR__ . '/vendor/autoload.php';
 
-$moduleFactory = new \Vain\Expression\Module\Factory\ModuleFactory();
-$moduleRepository = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
-$evaluator = new Vain\Expression\Evaluator\Evaluator($comparatorRepository);
-$descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
-$comparatorFactory = new \Vain\Comparator\Factory\ComparatorFactory();
+$moduleFactory        = new \Vain\Expression\Module\Factory\ModuleFactory();
+$moduleRepository     = new \Vain\Expression\Module\Repository\ModuleRepository($moduleFactory);
+$comparatorFactory    = new \Vain\Comparator\Factory\ComparatorFactory();
 $comparatorRepository = new \Vain\Comparator\Repository\ComparatorRepository($comparatorFactory);
+$evaluator            = new Vain\Expression\Evaluator\Evaluator($comparatorRepository);
+$descriptorFactory    = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($moduleRepository, $evaluator);
 
 $humanParser = new \Vain\Expression\Parser\Human\HumanParser();
 
