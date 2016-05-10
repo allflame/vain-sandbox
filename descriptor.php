@@ -32,7 +32,7 @@ $expression = new \Vain\Expression\Comparison\GreaterOrEqual\GreaterOrEqualExpre
         ->property('transaction')
         ->property('items')
         ->filter($filterExpression)
-        ->func('count')
+        ->helper(\Vain\Sandbox\Data\Module\Factory\SandboxModuleFactory::class, 'helper_test', [2])
         ->getDescriptor(),
     /**
     ->property('basket')

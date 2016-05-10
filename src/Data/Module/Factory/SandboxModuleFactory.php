@@ -34,4 +34,9 @@ class SandboxModuleFactory implements ModuleFactoryInterface
                 break;
         }
     }
+
+    public static function helper_test($a, $b)
+    {
+        return count($a) * $b;
+    }
 }
