@@ -1,5 +1,5 @@
 {
-    "name": "mmjitsu/vain-sandbox",
+    "name": "vain/sandbox",
     "type": "shared-package",
     "authors": [
         {
@@ -16,11 +16,11 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "mmjitsu/vain-core" : "dev-master",
-        "mmjitsu/vain-logger" : "dev-master",
-        "mmjitsu/vain-comparator" : "dev-master",
-        "mmjitsu/vain-expression" : "dev-master",
-        "mmjitsu/vain-operation" : "dev-master"
+        "vain/core" : "dev-master",
+        "vain/logger" : "dev-master",
+        "vain/comparator" : "dev-master",
+        "vain/expression" : "dev-master",
+        "vain/operation" : "dev-master"
     },
     "repositories": [
         {
@@ -54,6 +54,10 @@
         {
             "type": "git",
             "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-operation.git"
+        },
+        {
+            "type": "git",
+            "url": "http://gitlab.cosmonova.net.ua/mmjitsu/vain-value.git"
         }
     ],
     "config": {
