@@ -57,5 +57,5 @@ for ($i = 1; $i <= 5; $i++) {
 $transaction = new Vain\Core\Runtime\RuntimeData(['id' => 100, 'items' => $items, 'weight' => $totalWeight]);
 $basket = new \Vain\Core\Runtime\RuntimeData(['transaction' => $transaction]);
 $runtimeData = new \Vain\Core\Runtime\RuntimeData(['basket' => $basket, 'api' => 'backoffice', 'php_version' => PHP_VERSION]);
-var_dump($expression->parse($humanParser));
-var_dump($expression->evaluate($evaluator, $runtimeData));
+var_dump($expression->accept($humanParser));
+var_dump($expression->accept($evaluator->withContext($runtimeData)));

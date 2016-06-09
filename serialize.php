@@ -19,14 +19,20 @@ $descriptorFactory = new \Vain\Expression\Descriptor\Factory\DescriptorFactory($
 $serializer = new \Vain\Expression\Serializer\Serializer($expressionFactory, $descriptorFactory);
 
 
-$expression = new \Vain\Expression\Comparison\Less\LessExpression(
+$expression1 = new \Vain\Expression\Comparison\Less\LessExpression(
     $descriptorFactory->module('system.time'),
-    $descriptorFactory->mode($descriptorFactory->inplace(new DateTime('+1 day')), 'time')
+    $descriptorFactory->mode($descriptorFactory->inplace(new DateTime('2016-09-01')), 'time')
 );
 
-printf('Before serialization:%s%s%s', PHP_EOL, $expression->parse($humanParser), PHP_EOL);
+$expression2 = new \Vain\Expression\Comparison\Greater\GreaterExpression(
+    $descriptorFactory->module('system.time'),
+    $descriptorFactory->mode($descriptorFactory->inplace(new DateTime('2016-10-01')), 'time')
+);
+$expression = new Vain\Expression\Binary\AndX\AndExpression($expression1, $expression2);
+
+printf('Before serialization:%s%s%s', PHP_EOL, $expression->accept($humanParser), PHP_EOL);
 $serializedExpression = $serializer->serializeExpression($expression);
 printf('Serialized presentation:%s%s%s', PHP_EOL, json_encode($serializedExpression), PHP_EOL);
 $unserializedExpression = $serializer->unserializeExpression($serializedExpression);
 $humanParser = new \Vain\Expression\Parser\Human\HumanParser();
-printf('After unserialization:%s%s%s', PHP_EOL, $unserializedExpression->parse($humanParser), PHP_EOL);
+printf('After unserialization:%s%s%s', PHP_EOL, $unserializedExpression->accept($humanParser), PHP_EOL);
