@@ -16,11 +16,11 @@
     },
     "require": {
         "php": ">=5.6.0",
-        "vain/core" : "dev-dev",
-        "vain/logger" : "dev-dev",
-        "vain/comparator" : "dev-dev",
-        "vain/expression" : "dev-dev",
-        "vain/operation" : "dev-dev"
+        "vain/core" : dev-master,
+        "vain/logger" : dev-master,
+        "vain/comparator" : dev-master,
+        "vain/expression" : dev-master,
+        "vain/operation" : dev-master
     },
     "repositories": [
         {
