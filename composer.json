@@ -4,7 +4,7 @@
     "authors": [
         {
             "name": "Taras Girnyk",
-            "email": "le@mirohost.net",
+            "email": "taras.p.gyrnik@gmail.com",
             "homepage": "https://github.com/allflame/vain-sandbox",
             "role": "Maintainer"
         }
@@ -15,12 +15,12 @@
         }
     },
     "require": {
-        "php": ">=5.6.0",
-        "vain/core" : "dev-dev",
-        "vain/logger" : "dev-dev",
-        "vain/comparator" : "dev-dev",
-        "vain/expression" : "dev-dev",
-        "vain/operation" : "dev-dev"
+        "php": ">=7.0",
+        "vain/core": "dev-dev",
+        "vain/logger": "dev-dev",
+        "vain/comparator": "dev-dev",
+        "vain/expression": "dev-dev",
+        "vain/operation": "dev-dev"
     },
     "repositories": [
         {
