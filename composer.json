@@ -16,11 +16,11 @@
     },
     "require": {
         "php": ">=7.0",
-        "vain/core": "dev-dev",
-        "vain/logger": "dev-dev",
-        "vain/comparator": "dev-dev",
-        "vain/expression": "dev-dev",
-        "vain/operation": "dev-dev"
+        "vain/core": "^0.2",
+        "vain/logger": "^0.2",
+        "vain/comparator": "^0.2",
+        "vain/expression": "^0.2",
+        "vain/operation": "^0.2"
     },
     "repositories": [
         {
